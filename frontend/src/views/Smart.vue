@@ -1,22 +1,36 @@
 <template>
-  <div class="container">
+<div class="w-100 justify-content-center">
+  <h2 v-text="`Tour de heroes (${countHeros})`" class="text-info"></h2>
+    <div class="container">
     <div class="w-50">
-      <h2 v-text="`Tour de heroes (${countHeros})`"></h2>
       <buscador @search="filterHerosByPower"></buscador>
+      <br>
       <div class="d-flex justify-content-end">
         <button type="button" @click="showForm = true" class="btn">AGREGAR HEROE</button>
       </div>
-      <div class="d-flex">
+      <br>
+      <div class="row">
         <heroe :hero="item" :index="index" v-for="(item,index) in heros" :key="index" @removeHero="removeHero"></heroe>
       </div>
     </div>
     <form-hero v-if="showForm" @addHero="addHero"></form-hero>
   </div>
+</div>
 </template>
 
 <style>
   .d-flex{
     display: flex;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+  }
+
+  .item-flex{
+    flex: 0 1 1;
   }
 
   .d-inline{
@@ -33,10 +47,7 @@
 
   .container{
     width: 100%;
-    padding-right: 50px;
-    padding-left: 50px;
-    margin-right: auto;
-    margin-left: auto;
+    display: flex;
   }
 
   .w-auto{
@@ -51,6 +62,18 @@
     width: 50%;
   }
 
+  .w-40{
+    width: 40%;
+  }
+
+  .w-30{
+    width: 30%;
+  }
+
+  .text-right{
+    text-align: right;
+  }
+
   .justify-content-center{
     justify-content: center;
   }
@@ -63,8 +86,24 @@
     margin: 10px;
   }
 
+  .mr-2{
+    margin-right: 10px;
+  }
+
+  .mt-2{
+    margin-top: 10px;
+  }
+
   .btn{
     height: 25px;
+  }
+
+  .text-danger{
+    color: red;
+  }
+
+  .text-info{
+    color: blue;
   }
 
   input{
@@ -98,7 +137,6 @@ export default {
       this.$store.dispatch('setHero',hero);
     },
     removeHero(index){
-      this.showForm = false;
       this.$store.dispatch('deleteHero',index);
     }
   },

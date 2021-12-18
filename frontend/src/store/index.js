@@ -35,7 +35,16 @@ export default new Vuex.Store({
   getters: {
     heros: (state) => (power = null) => {
       if(power){
-        return state.heros.filter(item => item.poderes.includes(power));
+        return state.heros.filter(item => {
+          if(!item.poderes.length)
+            return false;
+          for (let index = 0; index < item.poderes.length; index++) {
+            if(item.poderes[index].toLowerCase() == power){
+              return true; 
+            }
+          }
+          return false;
+        });
       }else{
         return state.heros;
       }

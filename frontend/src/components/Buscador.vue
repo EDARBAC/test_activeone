@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="d-flex">
         <input type="text" v-model="poder">
         <button type="button" @click="search" class="btn">Buscar </button>
     </div>
@@ -15,7 +15,7 @@ export default {
     },
     methods: {
         search(){
-          let data = this.poder? this.poder.trim() : null;
+          let data = this.poder? this.poder.trim().toLowerCase() : null;
           this.$emit('search',data);
         }
     }
